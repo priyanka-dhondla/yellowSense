@@ -1,6 +1,6 @@
-# Cities Weather Info
+# Job Listings Application
 
-This project displays weather information for various cities using React.
+This is a React-based web application that fetches and displays job listings. Users can bookmark jobs and navigate through different pages to view more job details. The project uses APIs to fetch job data and includes features like pagination, bookmarking, and job details display.
 
 ## Getting Started
 
@@ -11,3 +11,5 @@ To install the dependencies and run the application:
 ```bash
 npm install && npm start
 ```
+#### Deployment
+
