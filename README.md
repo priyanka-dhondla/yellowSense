@@ -13,4 +13,4 @@ npm install && npm start
 ```
 #### Deployment
 
-https://yellow-sense-eilg.vercel.app/
+https://yellow-sense-8eqz.vercel.app/jobs
