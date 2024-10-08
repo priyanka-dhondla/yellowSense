@@ -9,7 +9,6 @@ import {
 const BookMarks = () => {
   const [bookmarks, setBookmarks] = useState([]);
 
-  // Fetch bookmarks from local storage on component mount
   useEffect(() => {
     const storedBookmarks = localStorage.getItem("bookmarks");
     if (storedBookmarks) {

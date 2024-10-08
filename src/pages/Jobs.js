@@ -16,9 +16,9 @@ const Jobs = () => {
   const [page, setPage] = useState(1);
   const [bookmarked, setBookmarked] = useState(new Set());
   const [pagesToShow, setPagesToShow] = useState([]);
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useNavigate(); 
 
-  const totalPages = 10; // Adjust this based on your API pagination
+  const totalPages = 3;
 
   const fetchJobs = useCallback(async (pageNumber) => {
     setLoading(true);
@@ -45,8 +45,8 @@ const Jobs = () => {
   useEffect(() => {
     const calculatePagesToShow = () => {
       const pages = [];
-      const startPage = Math.max(1, page - 2);
-      const endPage = Math.min(totalPages, startPage + 4);
+      const startPage = Math.max(1, page - 1); 
+      const endPage = Math.min(totalPages, startPage + 2);
       for (let i = startPage; i <= endPage; i++) {
         pages.push(i);
       }
@@ -98,7 +98,7 @@ const Jobs = () => {
   };
 
   const handleViewDetails = (jobId) => {
-    navigate(`/jobs/${jobId}`); // Navigate to job details page
+    navigate(`/jobs/${jobId}`); 
   };
 
   if (loading) {
@@ -110,15 +110,24 @@ const Jobs = () => {
     );
   }
 
+ 
+  const uniqueJobs = new Map();
+  jobs.forEach(job => {
+    if (job.title && job.company_name && !uniqueJobs.has(job.id)) {
+      uniqueJobs.set(job.id, job);
+    }
+  });
+  const filteredJobs = Array.from(uniqueJobs.values());
+
   return (
     <>
       <div className="pb-20">
         <h1 className="text-2xl text-center font-bold text-green-500 mb-6">Jobs</h1>
-        {jobs.length === 0 ? (
+        {filteredJobs.length === 0 ? (
           <div className="text-center text-gray-500">No jobs found.</div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {jobs.map((job) => (
+            {filteredJobs.map((job) => (
               <div
                 key={job.id}
                 className="bg-white border border-gray-200 rounded-lg shadow-lg p-6 flex flex-col justify-between h-full relative"
@@ -163,7 +172,6 @@ const Jobs = () => {
           </div>
         )}
 
-        {/* Pagination */}
         <nav aria-label="Page navigation example" className="mt-6 flex justify-center">
           <ul className="flex items-center -space-x-px h-8 text-sm">
             <li>
